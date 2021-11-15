@@ -15,6 +15,7 @@ public class PlayerController : MonoBehaviour
     private Animator animPlayer;
     private Rigidbody rbPlayer;
     private bool isGrounded = true;
+    
    
 
     
@@ -70,6 +71,15 @@ public class PlayerController : MonoBehaviour
             isGrounded = true;
             Debug.Log("Floor");
         }
+        if (other.gameObject.CompareTag("Bullet"))
+        {
+            Destroy(gameObject);
+        }
+        if (other.gameObject.CompareTag("Enemy"))
+        {
+            Destroy(gameObject);
+        }
+       
     }
     private void OnTriggerStay(Collider other)
     {
@@ -82,7 +92,7 @@ public class PlayerController : MonoBehaviour
             isGrounded = false;
         }
     }
-
+  
 
 
 

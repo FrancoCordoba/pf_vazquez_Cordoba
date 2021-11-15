@@ -35,7 +35,7 @@ public class EnemyPath : MonoBehaviour
 
         float distance = deltaVector.magnitude;
 
-        //transform.LookAt(waypoints[currentIndex].position);
+        transform.LookAt(waypoints[currentIndex].position);
 
         if (distance < minimumDistance)
         {
