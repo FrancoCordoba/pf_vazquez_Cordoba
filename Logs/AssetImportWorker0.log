@@ -663,3 +663,4 @@ Received Import Request.
 Start importing Assets/Characters/Enemy/Animation/Ch46_nonPBR@Standing Idle.fbx using Guid(4e048d9f6d37b344994b567ca8158c8d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'fe63999682d502dafe9a23cfc7550bcd') in 0.011038 seconds 
   Import took 0.022079 seconds .
 
+AssetImportWorkerClient::OnTransportError - code=2 error=End of file
