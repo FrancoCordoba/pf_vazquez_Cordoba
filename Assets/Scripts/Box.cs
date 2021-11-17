@@ -19,7 +19,10 @@ public class Box : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            Destroy(gameObject);
+            GameManager.instance.addScore();
+            Debug.Log(GameManager.getScore());
+            Destroy(gameObject);         
         }
     }
+   
 }
