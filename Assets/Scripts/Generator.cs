@@ -4,25 +4,56 @@ using UnityEngine;
 
 public class Generator : MonoBehaviour
 {
-    public GameObject[] BalaPrefab;
-    public float startDelay = 2;
-    public float spawnInterval = 1.5f;
+    
+   
+    [SerializeField] private float distanceRay = 5f;
+    [SerializeField] GameObject shootOrigen;
+    private bool isShoot;
+    [SerializeField] private GameObject bulletPrefab;
+    [SerializeField] private float timeShoot = 0f;
+    [SerializeField] private float shootCooldown = 2f;
+    [SerializeField] private float bulletDestuction = 3;
 
     // Start is called before the first frame update
     void Start()
     {
-        InvokeRepeating("SpawnEnemy", 2f, 1.5f);
+     
     }
 
     // Update is called once per frame
     void Update()
     {
-
+        if (isShoot)
+        {
+            RaycastCannon();
+        }
+        else
+        {
+            timeShoot += Time.deltaTime;        
+        }
+        if (timeShoot > shootCooldown)
+        {
+            isShoot = true;
+        }
     }
-    void SpawnEnemy()
+   
+    private void RaycastCannon()
     {
-        int enemyIndex = Random.Range(0, BalaPrefab.Length);
-        Debug.Log(enemyIndex);
-        Instantiate(BalaPrefab[enemyIndex], transform.position, BalaPrefab[enemyIndex].transform.rotation);
+        
+        RaycastHit hit;
+        if (Physics.Raycast(shootOrigen.transform.position, shootOrigen.transform.TransformDirection(Vector3.forward), out hit, distanceRay))
+        {
+            Debug.Log("Detectado el Raycast");
+            isShoot = false;
+            timeShoot = 0;
+            GameObject b =Instantiate(bulletPrefab,shootOrigen.transform.position,bulletPrefab.transform.rotation);
+            b.GetComponent<Rigidbody>().AddForce(shootOrigen.transform.TransformDirection(Vector3.forward) * 10f, ForceMode.Impulse);
+        }
+        
+    }
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.cyan;
+        Gizmos.DrawRay(shootOrigen.transform.position, shootOrigen.transform.TransformDirection(Vector3.forward) * distanceRay);
     }
 }
